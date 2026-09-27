@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "actualizado": "2026-09-27",
+  "nota": "Recetas para leer los catalogos. Son DATOS, no codigo: el motor solo entiende los 'tipo' implementados (vtex, fcom, next-data, html-magento), asi que una receta manipulada puede devolver datos equivocados pero nunca ejecutar nada.",
+  "tiendas": {
+    "metro": {
+      "nombre": "Metro",
+      "tipo": "vtex",
+      "base": "https://www.metro.pe",
+      "web": "https://www.metro.pe",
+      "color": "#e4002b",
+      "endpoint": "/api/catalog_system/pub/products/search",
+      "vendedorOficial": "cencosud|metro"
+    },
+    "plazavea": {
+      "nombre": "Plaza Vea",
+      "tipo": "vtex",
+      "base": "https://www.plazavea.com.pe",
+      "web": "https://www.plazavea.com.pe",
+      "color": "#df1504",
+      "endpoint": "/api/catalog_system/pub/products/search",
+      "vendedorOficial": "plaza\\s*vea|supermercados peruanos"
+    },
+    "tottus": {
+      "nombre": "Tottus",
+      "tipo": "fcom",
+      "base": "https://www.tottus.com.pe",
+      "web": "https://www.tottus.com.pe",
+      "color": "#00843d",
+      "ruta": "/tottus-pe/buscar?Ntt={q}&page={p}",
+      "json": "props.pageProps.results",
+      "total": "props.pageProps.pagination.count",
+      "porPagina": "props.pageProps.pagination.perPage",
+      "vendedorOficial": "tottus|falabella",
+      "imagenHost": "tottusPE",
+      "vendedorPorDefecto": "Tottus"
+    },
+    "falabella": {
+      "nombre": "Falabella",
+      "tipo": "fcom",
+      "base": "https://www.falabella.com.pe",
+      "web": "https://www.falabella.com.pe",
+      "color": "#0b7a3b",
+      "ruta": "/falabella-pe/search?Ntt={q}&page={p}",
+      "json": "props.pageProps.results",
+      "total": "props.pageProps.pagination.count",
+      "porPagina": "props.pageProps.pagination.perPage",
+      "vendedorOficial": "tottus|falabella",
+      "imagenHost": "falabellaPE",
+      "vendedorPorDefecto": "Falabella"
+    },
+    "ripley": {
+      "nombre": "Ripley",
+      "tipo": "next-data",
+      "base": "https://simple.ripley.com.pe",
+      "web": "https://simple.ripley.com.pe",
+      "color": "#7b2d8e",
+      "ruta": "/search/{q}?page={p}",
+      "json": "props.pageProps.findabilityProps.data.products",
+      "total": "props.pageProps.findabilityProps.data.total",
+      "porPagina": "props.pageProps.findabilityProps.data.limit",
+      "etiquetaTarjeta": "con tarjeta Ripley",
+      "campos": {
+        "id": "sku",
+        "nombre": "name",
+        "precio": "priceNumber",
+        "precioAlternativo": "ripleyPriceNumber",
+        "precioLista": "masterPriceNumber",
+        "imagen": "primaryImage",
+        "imagenes": "images",
+        "stock": "inStock",
+        "marca": "brand",
+        "vendedor": "shop.shopName",
+        "vendedorAlternativo": "seller",
+        "url": "{base}/{sku}"
+      }
+    },
+    "oechsle": {
+      "nombre": "Oechsle",
+      "tipo": "vtex",
+      "base": "https://www.oechsle.pe",
+      "web": "https://www.oechsle.pe",
+      "color": "#fd3827",
+      "endpoint": "/api/catalog_system/pub/products/search",
+      "vendedorOficial": "oechsle"
+    },
+    "coolbox": {
+      "nombre": "Coolbox",
+      "tipo": "vtex",
+      "base": "https://www.coolbox.pe",
+      "web": "https://www.coolbox.pe",
+      "color": "#e0132e",
+      "endpoint": "/api/catalog_system/pub/products/search",
+      "vendedorOficial": "rash\\s*peru|coolbox"
+    },
+    "efe": {
+      "nombre": "Tiendas EFE",
+      "tipo": "html-magento",
+      "base": "https://www.efe.com.pe",
+      "web": "https://www.efe.com.pe",
+      "color": "#002849",
+      "ruta": "/catalogsearch/result/?q={q}&p={p}",
+      "selectores": {
+        "enlace": "a.product-item-link",
+        "imagen": "img.product-image-photo",
+        "marca": "span.brand-name",
+        "vendedor": "div.label-sold-by",
+        "cajaPrecio": "[data-price-box]",
+        "precioFinal": "[data-price-type=\"finalPrice\"]",
+        "precioLista": "[data-price-type=\"oldPrice\"]"
+      },
+      "vendedorOficial": "tiendas?\\s*efe|^efe$",
+      "vendedorPorDefecto": "Tiendas EFE"
+    }
+  }
+}
