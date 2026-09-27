@@ -3,124 +3,428 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Política de privacidad — MasBaratoPe</title>
+    <title>MasBaratoPe — compara precios en 8 tiendas del Perú</title>
+    <meta
+      name="description"
+      content="Compara precios de supermercados y tiendas por departamento del Perú, arma tu lista de la compra y averigua dónde te sale más barata. Gratis y sin registro."
+    />
+    <meta name="theme-color" content="#0b6b3a" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="MasBaratoPe — compara precios en 8 tiendas del Perú" />
+    <meta
+      property="og:description"
+      content="Compara precios, arma tu lista de la compra y mira dónde te sale más barata. Gratis y sin registro."
+    />
+    <meta property="og:image" content="img/grafico.png" />
+
+    <link rel="icon" href="img/icono.png" />
+    <link rel="apple-touch-icon" href="img/icono.png" />
+
     <style>
-      body { max-width: 46rem; margin: 0 auto; padding: 2.5rem 1.25rem; font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif; line-height: 1.6; color: #12161c; }
-      h1 { font-size: 1.7rem; }
-      h2 { font-size: 1.15rem; margin-top: 2rem; }
-      code { background: #f0f2f5; padding: 0.1rem 0.35rem; border-radius: 4px; }
-      .fecha { color: #63707f; font-size: 0.9rem; }
-      ul { padding-left: 1.25rem; }
+      :root {
+        --verde: #0b6b3a;
+        --verde-claro: #e6f4ec;
+        --tinta: #12161c;
+        --gris: #5d6b7a;
+        --borde: #e3e7ed;
+        --fondo: #ffffff;
+        --fondo-2: #f6f8f9;
+        --radio: 16px;
+        --sombra: 0 1px 2px rgba(16, 24, 40, 0.05), 0 12px 32px -18px rgba(16, 24, 40, 0.25);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --verde: #3fb950;
+          --verde-claro: #16301f;
+          --tinta: #e8edf3;
+          --gris: #98a6b4;
+          --borde: #262d38;
+          --fondo: #0d1117;
+          --fondo-2: #151b23;
+          --sombra: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 32px -18px rgba(0, 0, 0, 0.8);
+        }
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        background: var(--fondo);
+        color: var(--tinta);
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .wrap { width: min(1080px, 100% - 2.5rem); margin-inline: auto; }
+
+      a { color: var(--verde); }
+
+      /* ------------------------------- cabecera ------------------------------- */
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: color-mix(in srgb, var(--fondo) 92%, transparent);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--borde);
+      }
+      .barra { display: flex; align-items: center; gap: 0.6rem; padding: 0.7rem 0; }
+      .barra img { width: 34px; height: 34px; border-radius: 9px; }
+      .marca { font-weight: 800; font-size: 1.1rem; letter-spacing: -0.01em; }
+      .marca em { font-style: normal; color: var(--verde); }
+      .barra nav { margin-left: auto; display: flex; gap: 1.1rem; font-size: 0.92rem; font-weight: 600; }
+      .barra nav a { color: var(--gris); text-decoration: none; }
+      .barra nav a:hover { color: var(--verde); }
+      @media (max-width: 640px) { .barra nav { display: none; } }
+
+      /* --------------------------------- hero -------------------------------- */
+      .hero { padding: 3.5rem 0 2.5rem; text-align: center; }
+      .hero h1 {
+        font-size: clamp(1.9rem, 5vw, 3rem);
+        line-height: 1.12;
+        letter-spacing: -0.02em;
+        margin: 0 0 1rem;
+      }
+      .hero h1 span { color: var(--verde); }
+      .hero p { font-size: clamp(1rem, 2.2vw, 1.18rem); color: var(--gris); max-width: 46ch; margin: 0 auto 2rem; }
+      .hero img.app { width: 96px; height: 96px; border-radius: 22px; box-shadow: var(--sombra); }
+
+      .botones { display: flex; gap: 0.7rem; justify-content: center; flex-wrap: wrap; }
+      .boton {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        padding: 0.8rem 1.3rem;
+        border-radius: 12px;
+        background: var(--verde);
+        color: #fff;
+        font-weight: 700;
+        font-size: 0.98rem;
+        text-decoration: none;
+        border: 1px solid var(--verde);
+      }
+      .boton.secundario { background: transparent; color: var(--tinta); border-color: var(--borde); }
+      .boton svg { width: 18px; height: 18px; }
+      .nota { color: var(--gris); font-size: 0.82rem; margin-top: 0.9rem; }
+
+      /* -------------------------------- secciones ------------------------------- */
+      section { padding: 3rem 0; }
+      section.alt { background: var(--fondo-2); }
+      h2 { font-size: clamp(1.35rem, 3.2vw, 1.8rem); letter-spacing: -0.01em; margin: 0 0 0.6rem; }
+      .sub { color: var(--gris); margin: 0 0 2rem; max-width: 60ch; }
+
+      .rejilla { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+      .tarjeta {
+        background: var(--fondo);
+        border: 1px solid var(--borde);
+        border-radius: var(--radio);
+        padding: 1.3rem;
+        box-shadow: var(--sombra);
+      }
+      section.alt .tarjeta { background: var(--fondo); }
+      .tarjeta .icono {
+        display: grid;
+        place-items: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 11px;
+        background: var(--verde-claro);
+        color: var(--verde);
+        margin-bottom: 0.8rem;
+      }
+      .tarjeta .icono svg { width: 22px; height: 22px; }
+      .tarjeta h3 { margin: 0 0 0.4rem; font-size: 1.02rem; }
+      .tarjeta p { margin: 0; color: var(--gris); font-size: 0.93rem; }
+
+      ol.pasos { counter-reset: paso; list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+      ol.pasos li { counter-increment: paso; position: relative; padding-left: 3rem; }
+      ol.pasos li::before {
+        content: counter(paso);
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 2.1rem;
+        height: 2.1rem;
+        border-radius: 50%;
+        background: var(--verde);
+        color: #fff;
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+      }
+      ol.pasos h3 { margin: 0 0 0.25rem; font-size: 1rem; }
+      ol.pasos p { margin: 0; color: var(--gris); font-size: 0.92rem; }
+
+      /* ------------------------------ capturas ------------------------------ */
+      .capturas { display: flex; gap: 1rem; overflow-x: auto; padding: 0.4rem 0 1.2rem; scroll-snap-type: x mandatory; }
+      .capturas img {
+        width: 260px;
+        flex: none;
+        border-radius: 14px;
+        border: 1px solid var(--borde);
+        box-shadow: var(--sombra);
+        scroll-snap-align: center;
+      }
+
+      /* --------------------------------- faq --------------------------------- */
+      details {
+        border-bottom: 1px solid var(--borde);
+        padding: 1rem 0;
+      }
+      details summary { cursor: pointer; font-weight: 700; list-style: none; }
+      details summary::-webkit-details-marker { display: none; }
+      details summary::after { content: "+"; float: right; color: var(--verde); font-weight: 800; }
+      details[open] summary::after { content: "−"; }
+      details p { margin: 0.7rem 0 0; color: var(--gris); }
+
+      /* -------------------------------- footer -------------------------------- */
+      footer { border-top: 1px solid var(--borde); padding: 2.5rem 0 3.5rem; color: var(--gris); font-size: 0.88rem; }
+      footer .enlaces { display: flex; gap: 1.2rem; flex-wrap: wrap; margin-bottom: 1rem; font-weight: 600; }
+      footer p { margin: 0 0 0.7rem; max-width: 70ch; }
     </style>
   </head>
   <body>
-    <h1>Política de privacidad de MasBaratoPe</h1>
-    <p class="fecha">Última actualización: 27 de septiembre de 2026</p>
+    <header>
+      <div class="wrap barra">
+        <img src="img/icono.png" alt="MasBaratoPe" />
+        <span class="marca">MasBarato<em>Pe</em></span>
+        <nav>
+          <a href="#como">Cómo funciona</a>
+          <a href="#capturas">Capturas</a>
+          <a href="#preguntas">Preguntas</a>
+          <a href="#descargar">Descargar</a>
+        </nav>
+      </div>
+    </header>
 
-    <p>
-      MasBaratoPe es una aplicación que compara precios de productos entre varias tiendas
-      peruanas. Esta política explica qué información trata la aplicación y cómo.
-    </p>
+    <main>
+      <div class="wrap hero">
+        <img class="app" src="img/icono.png" alt="Icono de MasBaratoPe" />
+        <h1>¿Dónde está <span>más barato</span>?</h1>
+        <p>
+          Compara precios de <strong>8 tiendas peruanas</strong> a la vez, arma tu lista de la compra y
+          averigua en qué tienda te sale mejor. Gratis y sin registro.
+        </p>
+        <div class="botones">
+          <a
+            class="boton"
+            href="https://play.google.com/store/apps/details?id=pe.masbaratope.app"
+            target="_blank"
+            rel="noopener"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path
+                d="M3.6 2.4c-.3.3-.5.7-.5 1.3v16.6c0 .6.2 1 .5 1.3l.1.1 9.3-9.3v-.2L3.7 2.9l-.1-.5zM17.2 15l-3.1-3.1v-.2L17.2 8.6l3.8 2.2c1.1.6 1.1 1.6 0 2.3L17.2 15zm-1.1.7-3.3-3.3-9.4 9.4c.4.4 1 .4 1.7 0l11-6.1zM4.4 2.2l9.4 9.4 3.3-3.3-11-6.1c-.6-.3-1.2-.3-1.7 0z"
+              />
+            </svg>
+            Descargar en Google Play
+          </a>
+          <a class="boton secundario" href="#como">Ver cómo funciona</a>
+        </div>
+        <p class="nota">Android 7.0 o superior · Sin cuentas · Sin publicidad intrusiva</p>
+      </div>
 
-    <h2>1. Quién es el responsable</h2>
-    <p>
-      El responsable del tratamiento es el desarrollador de MasBaratoPe. Para cualquier
-      consulta sobre privacidad puedes escribir a:
-      <strong>diego.bardalez@gmail.com</strong>.
-    </p>
+      <section class="alt" id="como">
+        <div class="wrap">
+          <h2>Así de fácil</h2>
+          <p class="sub">Tres pasos y ya sabes dónde te conviene comprar.</p>
+          <ol class="pasos">
+            <li>
+              <h3>Busca lo que quieres</h3>
+              <p>Escribe un producto y verás su precio en cada tienda, del más barato al más caro.</p>
+            </li>
+            <li>
+              <h3>Arma tu lista</h3>
+              <p>Añade todo lo que vas a comprar y pulsa «Encontrar precios bajos».</p>
+            </li>
+            <li>
+              <h3>Decide dónde comprar</h3>
+              <p>Te decimos cuánto cuesta la compra entera en cada tienda y cuánto ahorras repartiendo.</p>
+            </li>
+          </ol>
+        </div>
+      </section>
 
-    <h2>2. Qué datos tratamos</h2>
-    <p>
-      <strong>MasBaratoPe no tiene cuentas de usuario ni servidores propios, y no recoge
-      datos personales que te identifiquen.</strong> No pedimos nombre, correo, teléfono ni
-      ubicación, y no tenemos forma de identificarte.
-    </p>
-    <p>Lo que se guarda, y siempre <strong>dentro de tu propio teléfono</strong>, es:</p>
-    <ul>
-      <li><strong>Tu lista de la compra</strong>: los productos que escribes, con sus cantidades.</li>
-      <li><strong>Tu lista de deseos</strong>: los productos que guardas y, si lo pones, tu precio objetivo.</li>
-      <li><strong>Historial de precios</strong>: los precios que la app ha visto de esos productos.</li>
-      <li><strong>Preferencias</strong>: las tiendas que filtras, el orden de la lista y el tema.</li>
-    </ul>
-    <p>
-      Esta información se almacena en el almacenamiento local de la aplicación
-      (<code>localStorage</code>). Si desinstalas la app o borras sus datos, desaparece. No
-      se envía a ningún servidor nuestro, porque no tenemos ninguno.
-    </p>
+      <section>
+        <div class="wrap">
+          <h2>Qué puedes hacer</h2>
+          <p class="sub">Pensado para el súper del día a día, y también sirve para electrónica y moda.</p>
+          <div class="rejilla">
+            <div class="tarjeta">
+              <span class="icono">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <circle cx="11" cy="11" r="7" />
+                  <path d="M20 20l-3.5-3.5" />
+                </svg>
+              </span>
+              <h3>Comparar al instante</h3>
+              <p>El mismo producto en las 8 tiendas, con el precio y el enlace a cada una.</p>
+            </div>
+            <div class="tarjeta">
+              <span class="icono">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M6 6h15l-1.5 9h-12z" />
+                  <circle cx="9" cy="20" r="1.4" />
+                  <circle cx="18" cy="20" r="1.4" />
+                  <path d="M6 6L5 3H3" />
+                </svg>
+              </span>
+              <h3>Lista de la compra</h3>
+              <p>Te dice en qué tienda te sale más barata la compra entera y cuánto ahorras si repartes.</p>
+            </div>
+            <div class="tarjeta">
+              <span class="icono">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 20s-7-4.4-7-9.3A4 4 0 0 1 12 7a4 4 0 0 1 7 3.7C19 15.6 12 20 12 20z" />
+                </svg>
+              </span>
+              <h3>Lista de deseos</h3>
+              <p>Guarda lo que quieras comprar después y te avisamos cuando baje de tu precio objetivo.</p>
+            </div>
+            <div class="tarjeta">
+              <span class="icono">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 17l5-6 4 4 5-7 4 5" />
+                </svg>
+              </span>
+              <h3>Historial de precios</h3>
+              <p>Mira si hoy está caro o barato comparado con las últimas semanas.</p>
+            </div>
+            <div class="tarjeta">
+              <span class="icono">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <path d="M4 6h16M7 12h10M10 18h4" />
+                </svg>
+              </span>
+              <h3>Comparación justa</h3>
+              <p>Tiene en cuenta la presentación: no es lo mismo una bolsa de 800 mL que una caja de 946 mL.</p>
+            </div>
+            <div class="tarjeta">
+              <span class="icono">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="4" y="10" width="16" height="10" rx="2" />
+                  <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+                </svg>
+              </span>
+              <h3>Privado de verdad</h3>
+              <p>No hay cuentas ni registro. Tus listas y tu historial se quedan en tu teléfono.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-    <h2>3. A qué direcciones se conecta la app</h2>
-    <p>
-      Para poder comparar precios, la aplicación consulta directamente desde tu teléfono las
-      webs públicas de las tiendas:
-    </p>
-    <ul>
-      <li>Metro — <code>metro.pe</code></li>
-      <li>Plaza Vea — <code>plazavea.com.pe</code></li>
-      <li>Tottus — <code>tottus.com.pe</code></li>
-      <li>Falabella — <code>falabella.com.pe</code></li>
-      <li>Ripley — <code>simple.ripley.com.pe</code></li>
-      <li>Oechsle — <code>oechsle.pe</code></li>
-      <li>Coolbox — <code>coolbox.pe</code></li>
-      <li>Tiendas EFE — <code>efe.com.pe</code></li>
-    </ul>
-    <p>
-      En esas peticiones viajan la dirección IP de tu conexión y las cabeceras habituales
-      (como el identificador de la aplicación), igual que si entraras tú en esas webs. El
-      tratamiento que esas tiendas hagan de esos datos se rige por <em>sus</em> políticas de
-      privacidad, que no controlamos.
-    </p>
-    <p>
-      Además, la app descarga un fichero de configuración desde
-      <code>raw.githubusercontent.com</code> para mantener actualizada la forma de leer cada
-      tienda.
-    </p>
+      <section class="alt" id="capturas">
+        <div class="wrap">
+          <h2>Un vistazo</h2>
+          <p class="sub">Desliza para ver las pantallas.</p>
+          <div class="capturas">
+            <img src="img/captura-1-busqueda.png" alt="Resultados de una búsqueda comparando precios" loading="lazy" />
+            <img src="img/captura-2-lista.png" alt="Lista de la compra con el total por tienda" loading="lazy" />
+            <img src="img/captura-3-deseos.png" alt="Lista de deseos con el precio objetivo" loading="lazy" />
+            <img src="img/captura-4-menu.png" alt="Menú de la aplicación" loading="lazy" />
+          </div>
+        </div>
+      </section>
 
-    <h2>4. Publicidad</h2>
-    <p>
-      La aplicación muestra anuncios a través de <strong>Google AdMob</strong>. Para ello, el
-      SDK de Google puede recoger y tratar datos como el identificador de publicidad del
-      dispositivo, la dirección IP, el modelo de teléfono y datos de uso, con las finalidades
-      de mostrar anuncios y medirlos, según la
-      <a href="https://policies.google.com/privacy">política de privacidad de Google</a> y la
-      <a href="https://policies.google.com/technologies/ads">información sobre publicidad</a>.
-    </p>
-    <p>
-      Puedes restablecer o limitar tu identificador de publicidad en los ajustes de Android
-      (<em>Ajustes → Google → Anuncios</em>).
-    </p>
+      <section id="preguntas">
+        <div class="wrap">
+          <h2>Preguntas frecuentes</h2>
+          <p class="sub">Lo que suele preguntarse la gente.</p>
 
-    <h2>5. Menores</h2>
-    <p>
-      La aplicación no está dirigida a menores de 13 años y no recoge conscientemente datos
-      de menores.
-    </p>
+          <details open>
+            <summary>¿Es gratis?</summary>
+            <p>
+              Sí. La app se financia con publicidad, por eso verás algún anuncio. No hay compras dentro de
+              la aplicación ni versiones de pago.
+            </p>
+          </details>
+          <details>
+            <summary>¿Tengo que registrarme?</summary>
+            <p>
+              No. Se abre y se usa. No pedimos correo, teléfono ni ubicación, y tus listas se guardan solo
+              en tu teléfono.
+            </p>
+          </details>
+          <details>
+            <summary>¿Qué tiendas compara?</summary>
+            <p>
+              Metro, Plaza Vea, Tottus, Falabella, Ripley, Oechsle, Coolbox y Tiendas EFE.
+            </p>
+          </details>
+          <details>
+            <summary>¿Los precios son siempre los correctos?</summary>
+            <p>
+              Son precios informativos y pueden cambiar. El precio y la disponibilidad que valen son los que
+              veas en la tienda al comprar: por eso cada resultado lleva su enlace directo.
+            </p>
+          </details>
+          <details>
+            <summary>¿Puedo comprar desde la app?</summary>
+            <p>
+              No. MasBaratoPe solo compara y te lleva a la tienda. La compra la haces siempre en la web de
+              la tienda que elijas.
+            </p>
+          </details>
+          <details>
+            <summary>¿Sirve para cualquier producto?</summary>
+            <p>
+              Sí, aunque brilla con productos de supermercado y tecnología. Cuanto más concreto seas en la
+              búsqueda, mejores resultados.
+            </p>
+          </details>
+        </div>
+      </section>
 
-    <h2>6. Tus derechos</h2>
-    <p>
-      Como no disponemos de ningún dato personal tuyo ni de medios para identificarte, no es
-      posible atender solicitudes de acceso, rectificación o supresión sobre información que
-      no tenemos. Para borrar todo lo que la app guarda en tu teléfono basta con desinstalarla
-      o borrar sus datos desde los ajustes de Android.
-    </p>
+      <section class="alt" id="descargar">
+        <div class="wrap" style="text-align: center">
+          <h2>Pruébala</h2>
+          <p class="sub" style="margin-inline: auto">Gratis, sin registro y sin complicaciones.</p>
+          <div class="botones">
+            <a
+              class="boton"
+              href="https://play.google.com/store/apps/details?id=pe.masbaratope.app"
+              target="_blank"
+              rel="noopener"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path
+                  d="M3.6 2.4c-.3.3-.5.7-.5 1.3v16.6c0 .6.2 1 .5 1.3l.1.1 9.3-9.3v-.2L3.7 2.9l-.1-.5zM17.2 15l-3.1-3.1v-.2L17.2 8.6l3.8 2.2c1.1.6 1.1 1.6 0 2.3L17.2 15zm-1.1.7-3.3-3.3-9.4 9.4c.4.4 1 .4 1.7 0l11-6.1zM4.4 2.2l9.4 9.4 3.3-3.3-11-6.1c-.6-.3-1.2-.3-1.7 0z"
+                />
+              </svg>
+              Descargar en Google Play
+            </a>
+          </div>
+          <p class="nota">Android 7.0 o superior</p>
+        </div>
+      </section>
+    </main>
 
-    <h2>7. Precios y responsabilidad</h2>
-    <p>
-      Los precios se toman de las webs públicas de las tiendas y pueden cambiar o contener
-      errores. La aplicación es informativa: el precio y la disponibilidad válidos son los que
-      figuren en la tienda en el momento de la compra. MasBaratoPe no vende ni intermedia en
-      ninguna compra.
-    </p>
+    <footer>
+      <div class="wrap">
+        <div class="enlaces">
+          <a href="privacidad/">Política de privacidad</a>
+          <a href="mailto:diego.bardalez@gmail.com">Contacto</a>
+          <a href="https://play.google.com/store/apps/details?id=pe.masbaratope.app" target="_blank" rel="noopener">Google Play</a>
+        </div>
+        <p>
+          MasBaratoPe es una aplicación independiente que compara precios publicados por distintas tiendas.
+          No vende productos ni participa en las compras.
+        </p>
+        <p>
+          Los nombres y marcas de las tiendas pertenecen a sus respectivos titulares y se usan únicamente
+          para indicar el origen de cada precio. MasBaratoPe no tiene ninguna relación, patrocinio ni
+          afiliación con ellas.
+        </p>
+        <p>Los precios son informativos y pueden variar. Comprueba siempre el precio final en la tienda.</p>
+        <p style="margin-top: 1.2rem">© <span id="año">2026</span> MasBaratoPe · <a href="mailto:diego.bardalez@gmail.com">diego.bardalez@gmail.com</a></p>
+      </div>
+    </footer>
 
-    <h2>8. Marcas de terceros</h2>
-    <p>
-      Los nombres de las tiendas y sus marcas pertenecen a sus respectivos titulares y se usan
-      únicamente para indicar de qué establecimiento procede cada precio. MasBaratoPe no tiene
-      ninguna relación, patrocinio ni afiliación con ellas.
-    </p>
-
-    <h2>9. Cambios</h2>
-    <p>
-      Si esta política cambia, se actualizará esta página y la fecha de arriba.
-    </p>
+    <script>
+      document.getElementById('año').textContent = new Date().getFullYear();
+    </script>
   </body>
 </html>
