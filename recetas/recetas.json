@@ -116,6 +116,30 @@
       "vendedorOficial": "tambo",
       "vendedorPorDefecto": "Tambo"
     },
+    "pcfactory": {
+      "nombre": "PC Factory",
+      "tipo": "json-api",
+      "base": "https://api.pcfactory.com.pe",
+      "web": "https://www.pcfactory.com.pe",
+      "color": "#1b8f47",
+      "ruta": "/pcfactory-services-catalogo/v1/catalogo/productos?page={p0}&size={size}&search={q}&incluirFiltros=true",
+      "json": "content.items",
+      "baseImagen": "https://assets.pcfactory.com.pe",
+      "urlProducto": "{web}/producto/{slug}",
+      "campos": {
+        "id": "id",
+        "nombre": "nombre",
+        "marca": "marca",
+        "precio": "precio.efectivo",
+        "precioAlternativo": "precio.normal",
+        "precioLista": "precio.referencia",
+        "stock": "stock",
+        "imagen": "thumbnail",
+        "categoria": "categoria.nombre"
+      },
+      "vendedorOficial": "pc\\s*factory",
+      "vendedorPorDefecto": "PC Factory"
+    },
     "efe": {
       "nombre": "Tiendas EFE",
       "tipo": "html-magento",
