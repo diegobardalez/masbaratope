@@ -93,6 +93,29 @@
       "endpoint": "/api/catalog_system/pub/products/search",
       "vendedorOficial": "rash\\s*peru|coolbox"
     },
+    "tambo": {
+      "nombre": "Tambo",
+      "tipo": "feed",
+      "base": "https://www.tambo.pe",
+      "web": "https://www.tambo.pe",
+      "color": "#a01080",
+      "url": "/google/catalogue.txt",
+      "separador": "\t",
+      "caducaMinutos": 360,
+      "moneda": "PEN",
+      "campos": {
+        "id": "id",
+        "nombre": "title",
+        "precio": "price",
+        "precioOferta": "sale_price",
+        "disponible": "availability",
+        "url": "link",
+        "imagen": "image link",
+        "marca": "brand"
+      },
+      "vendedorOficial": "tambo",
+      "vendedorPorDefecto": "Tambo"
+    },
     "efe": {
       "nombre": "Tiendas EFE",
       "tipo": "html-magento",
